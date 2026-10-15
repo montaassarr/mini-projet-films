@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ajouter un film</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <form #f="ngForm" (ngSubmit)="submitHandler(f)">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Informations du film</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-item>
+                <ion-input label="Titre*" labelPlacement="floating" name="titre" ngModel required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input label="Année*" labelPlacement="floating" type="number" name="annee" ngModel required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-textarea label="Résumé" labelPlacement="floating" name="resume" ngModel [autoGrow]="true"></ion-textarea>
+              </ion-item>
+              <ion-item>
+                <ion-input #inpAffiche label="URL de l'affiche*" labelPlacement="floating" type="url"
+                  name="affiche" ngModel required></ion-input>
+              </ion-item>
+              @if (inpAffiche.value) {
+              <div class="image-preview">
+                <img [src]="inpAffiche.value" />
+              </div>
+              } @else {
+              <p class="ion-margin-top"><i>Aucune affiche saisie</i></p>
+              }
+
+              <ion-button class="ion-margin-top" type="submit" expand="block" color="success" [disabled]="f.invalid">
+                Ajouter ce film
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

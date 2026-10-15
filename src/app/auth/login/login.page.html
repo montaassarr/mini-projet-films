@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Connexion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="6" offset-md="3">
+        <form #f="ngForm" (ngSubmit)="onLogin(f)">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Se connecter</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-item>
+                <ion-input label="Email" labelPlacement="floating" type="email"
+                  name="email" ngModel required email></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input label="Mot de passe" labelPlacement="floating" type="password"
+                  name="password" ngModel required></ion-input>
+              </ion-item>
+              <ion-button class="ion-margin-top" type="submit" expand="block" [disabled]="f.invalid">
+                <ion-icon name="log-in-outline" slot="start"></ion-icon>
+                Se connecter
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

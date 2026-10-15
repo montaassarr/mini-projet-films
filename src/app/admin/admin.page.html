@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Administration</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-md="8" offset-md="2">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Films</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-button expand="block" routerLink="/add-film">
+              <ion-icon name="add-outline" slot="start"></ion-icon>
+              Ajouter un film
+            </ion-button>
+            <ion-button expand="block" fill="outline" (click)="importerTmdb()">
+              <ion-icon name="cloud-download-outline" slot="start"></ion-icon>
+              Importer la base de départ (TMDB)
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Utilisateurs</ion-card-title>
+          </ion-card-header>
+          <ion-list>
+            @for (user of tabUsers; track user.id) {
+            <ion-item>
+              <ion-avatar slot="start">
+                <img [src]="user.photo" />
+              </ion-avatar>
+              <ion-label>
+                <h2>{{ user.prenom }} {{ user.nom }} ({{ user.age }} ans)</h2>
+                <p>{{ user.email }}</p>
+                <ion-badge [color]="user.actif ? 'success' : 'medium'">
+                  {{ user.actif ? 'Actif' : 'Désactivé' }}
+                </ion-badge>
+              </ion-label>
+              <ion-button slot="end" fill="outline" size="small"
+                [color]="user.actif ? 'danger' : 'success'" (click)="changerStatut(user)">
+                {{ user.actif ? 'Désactiver' : 'Activer' }}
+              </ion-button>
+            </ion-item>
+            } @empty {
+            <ion-item lines="none">
+              <ion-label color="medium">Aucun utilisateur inscrit.</ion-label>
+            </ion-item>
+            }
+          </ion-list>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

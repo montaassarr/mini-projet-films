@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/films"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Détails</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  @if (selectedFilm) {
+  <ion-grid>
+    <ion-row>
+      <ion-col size="8" offset="2" size-md="4" offset-md="4">
+        <ion-img [src]="selectedFilm.affiche"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-md="8" offset-md="2">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ selectedFilm.titre }}</ion-card-title>
+            <ion-card-subtitle>
+              {{ selectedFilm.annee }}
+              @if (selectedFilm.note) { · ⭐ {{ selectedFilm.note | number: '1.1-1' }}/10 }
+            </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            {{ selectedFilm.resume || 'Pas de résumé.' }}
+          </ion-card-content>
+        </ion-card>
+
+        <ion-button class="ion-margin" expand="block" (click)="toggleFavori()"
+          [color]="estFavori ? 'medium' : 'danger'" [fill]="estFavori ? 'outline' : 'solid'">
+          <ion-icon slot="start" [name]="estFavori ? 'heart-dislike-outline' : 'heart'"></ion-icon>
+          {{ estFavori ? 'Retirer de ma playlist' : 'Ajouter à ma playlist' }}
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  }
+</ion-content>

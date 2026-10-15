@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Matching</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-margin">
+    <strong>Utilisateurs ayant les mêmes goûts que vous</strong>
+    <p class="hint">Taux de correspondance supérieur à {{ seuil }}% entre vos listes de favoris.</p>
+  </div>
+
+  <ion-list>
+    @for (m of matchs; track m.user.id) {
+    <ion-item>
+      <ion-avatar slot="start">
+        <img [src]="m.user.photo" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ m.user.prenom }} {{ m.user.nom }}</h2>
+        <p>{{ m.user.age }} ans · {{ m.communs }} film(s) en commun</p>
+      </ion-label>
+      <ion-badge slot="end" color="success">{{ m.taux }}%</ion-badge>
+    </ion-item>
+    } @empty {
+    <ion-item lines="none">
+      <ion-label class="ion-text-center ion-text-wrap" color="medium">
+        Aucun utilisateur ne dépasse {{ seuil }}% de correspondance pour le moment.
+        Ajoutez des films à votre playlist !
+      </ion-label>
+    </ion-item>
+    }
+  </ion-list>
+</ion-content>

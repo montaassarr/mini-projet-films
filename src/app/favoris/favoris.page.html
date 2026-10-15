@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Ma playlist</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-margin">
+    <strong>Mes films préférés ({{ mesFilms.length }})</strong>
+  </div>
+  <ion-list>
+    @for (film of mesFilms; track film.id) {
+    <ion-item>
+      <ion-thumbnail slot="start" [routerLink]="['/film-details', film.id]">
+        <img [src]="film.affiche" [alt]="film.titre" />
+      </ion-thumbnail>
+      <ion-label [routerLink]="['/film-details', film.id]">
+        <h2>{{ film.titre }}</h2>
+        <p>{{ film.annee }}</p>
+      </ion-label>
+      <ion-button slot="end" fill="clear" (click)="retirer(film)">
+        <ion-icon slot="icon-only" name="close-outline" color="danger"></ion-icon>
+      </ion-button>
+    </ion-item>
+    } @empty {
+    <ion-item lines="none">
+      <ion-label class="ion-text-center ion-text-wrap" color="medium">
+        Votre playlist est vide. Ajoutez des films depuis la liste des films.
+      </ion-label>
+    </ion-item>
+    }
+  </ion-list>
+</ion-content>

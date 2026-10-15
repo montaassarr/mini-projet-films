@@ -1,0 +1,10 @@
+.photo-preview {
+  text-align: center;
+  margin: 12px 0;
+}
+.photo-preview img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+}

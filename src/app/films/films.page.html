@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Films</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="recherche" placeholder="Rechercher un film"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    @for (film of filmsFiltres; track film.id) {
+    <ion-item [routerLink]="['/film-details', film.id]" detail>
+      <ion-thumbnail slot="start">
+        <img [src]="film.affiche" [alt]="film.titre" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ film.titre }}</h2>
+        <p>{{ film.annee }}</p>
+      </ion-label>
+      @if (estFavori(film)) {
+      <ion-icon name="heart" color="danger" slot="end"></ion-icon>
+      }
+    </ion-item>
+    } @empty {
+    <ion-item lines="none">
+      <ion-label class="ion-text-center ion-text-wrap" color="medium">
+        Aucun film.
+        @if (authSer.isAdmin()) { Importez la base de départ depuis la page Administration. }
+      </ion-label>
+    </ion-item>
+    }
+  </ion-list>
+</ion-content>
